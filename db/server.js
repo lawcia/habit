@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // const db_name = (process.env.NODE_ENV === )
-let url = `mongodb://localhost:27017/habitsDB`;
+let url = 'mongodb://localhost:27017/habits_db';
 mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true }
 );
 const db = mongoose.connection;

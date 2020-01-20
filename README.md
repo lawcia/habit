@@ -33,4 +33,12 @@ npm start
 ```
 This starts the development server at. You can view the website in the browser. 
 
+### Migrations
+
+change directory to ~habit/db
+in the terminal type this in the command line
+```
+migrate -d mongodb://localhost:27017/habitsDB create users 
+```
+
 
