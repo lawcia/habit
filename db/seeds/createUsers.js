@@ -1,26 +1,28 @@
 const User = require('../models/user_model')
-//console.log(User)
+
 const users = [{
-    username: 'user123',
+    username: 'user1',
     password: '123456'
 },{
-    username: 'user123',
-    password: '123456'
+    username: 'user2',
+    password: 'password'
 }]
 
 
+const saveUser = () => {
+    User.collection.drop()
+    users.forEach(user => {
+        const userObj = new User(user)
+        
+          userObj.save((err, data) => {
+              if(data){
+                  console.log('saved')
+                  console.log(data)
+              }
+          })
+    })
+}
 
-const first_user = new User({
-    username: 'user123',
-    password: '123456'
-})
-
-first_user.save((error) => {
-    if (error) {
-        console.log(error)
-    } else {
-    //console.log(user_data)
-    }
-})
+module.exports = saveUser
 
 
