@@ -5,12 +5,13 @@ const Schema = mongoose.Schema;
 const habitSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'User'
     },
     title: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     },

@@ -21,12 +21,12 @@ export default class Login extends React.Component {
     handleSubmit(event) {
         Axios.post('/api/v1/login', this.state)
             .then((res) => {
-                console.log(res.data)
                 if (res.status === 200) {
+                    this.props.setUserId(res.data._id, res.data.username)
                     this.props.loggedInUser()
                 }
             })
-            .catch((err) => console.error(err))
+            .catch((err) => alert('Wrong password!'))
         event.preventDefault();
         // alert('A name was submitted: ' + this.state.value);
     }

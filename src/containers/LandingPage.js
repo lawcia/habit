@@ -9,7 +9,7 @@ export default function LandingPage(props) {
             <h1>Register</h1>
             <RegisterForm />
             <h1>Login</h1>
-            <Login loggedInUser={props.loggedIn}/>
+            <Login loggedInUser={props.loggedIn} setUserId={props.setUserId}/>
         </div>
     )
 }
