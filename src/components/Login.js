@@ -21,7 +21,7 @@ export default class Login extends React.Component {
     handleSubmit(event) {
         Axios.post('/api/v1/login', this.state)
             .then((res) => {
-                console.log(res)
+                console.log(res.data)
                 if (res.status === 200) {
                     this.props.loggedInUser()
                 }
@@ -36,12 +36,12 @@ export default class Login extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Username:
-            <input type="text" name='username' value={this.state.value} onChange={this.handleChange} />
+            <input type="text" name='username' value={this.state.value} onChange={this.handleChange} required/>
                 </label>
                 <br />
                 <label>
                     Password:
-            <input type="text" name='password' value={this.state.value} onChange={this.handleChange} />
+            <input type="password" name='password' value={this.state.value} onChange={this.handleChange} required/>
                 </label>
                 <br />
                 <input type="submit" value="Submit" />

@@ -20,10 +20,20 @@ export default class RegisterForm extends React.Component {
 
     handleSubmit(event) {
         Axios.post('/api/v1/createuser', this.state)
-            .then((res) => console.log(res))
-            .catch((err) => console.error(err))
+            .then((res) => {
+                if(res.data.success){
+                alert(res.data.message)
+                }
+            })
+            .catch((err) => {
+                if(err.code === 409){
+                alert('This username has already been registered')
+            }else {
+                alert('Something went wrong')
+            }}
+            )
         event.preventDefault();
-        // alert('A name was submitted: ' + this.state.value);
+       
     }
 
     render() {
@@ -31,12 +41,13 @@ export default class RegisterForm extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Username:
-            <input type="text" name='username' value={this.state.value} onChange={this.handleChange} />
+            <input type="text" name='username' value={this.state.value} onChange={this.handleChange} minlength={3} required />
                 </label>
+                {}
                 <br />
                 <label>
                     Password:
-            <input type="text" name='password' value={this.state.value} onChange={this.handleChange} />
+            <input type="password" name='password' value={this.state.value} onChange={this.handleChange} minlength={6} required />
                 </label>
                 <br />
                 <input type="submit" value="Submit" />
