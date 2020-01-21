@@ -31,7 +31,7 @@ export default class App extends Component {
             <li>
               <Link to="/">Landing Page</Link>
             </li>
-            {this.state.loggedIn ?
+            {this.state.loggedIn &&
               <div>
                 <li>
                   <Link to="/dash">Dashboard</Link>
@@ -40,16 +40,17 @@ export default class App extends Component {
                   <Link to="/addHabit">Add Habit</Link>
                 </li>
               </div>
-              : null}
+              }
           </ul>
         </nav>
         <Switch>
-          <Route path="/dash">
-            <Dashboard />
-          </Route>
-          <Route path="/addHabit">
+
+          {this.state.loggedIn && <Route path="/dash">
+            <Dashboard userId={this.state.userId}/>
+          </Route>}
+          {this.state.loggedIn && <Route path="/addHabit">
             <AddHabit bigState={this.state}/>
-          </Route>
+            </Route> }
           <Route path="/">
             {this.state.loggedIn ? <Redirect to="/dash" /> : <LandingPage setUserId={this.getUserId} loggedIn={this.loggedInUser} />}
           </Route>
