@@ -1,5 +1,5 @@
 const User = require('../models/user_model')
-const Habit = require('../models/habit.model')
+const Habit = require('../models/habit_model')
 
 const users = [{
     username: 'user1',
