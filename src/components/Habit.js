@@ -15,6 +15,7 @@ export default class Habit extends Component {
     }
     strikethrough = () => {
         this.setState({ clicked: true })
+        Axios.put(`/api/v1/habitcheck/${this.props.habit._id}`)
     }
     render() {
         return (

@@ -107,16 +107,19 @@ router.delete('/deletehabit/:id', (req, res) => {
     })
 })
 
-router.put('/addcounter/:id', (req, res) => {
-    
-   const update = (err) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            
-        }
-    }
-    Habit.updateOne(req.params.id, update)
+router.put('/habitcheck/:id', (req, res) => {
+    Habit.findByIdAndUpdate(
+        { _id: req.params.id },
+        { $push: { dateChecked: Date() } },
+        (err, habit) => {
 
+            if(err){
+                 res.send(err)
+            }else {
+                console.log(habit.dateChecked)
+                res.send(habit)
+            }
+        }
+    )
 })
 module.exports = router;
