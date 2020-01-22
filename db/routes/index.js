@@ -65,7 +65,6 @@ router.post('/login', (req, res) => {
         }
     });
 })
-
 router.post('/createhabit', (req, res) => {
     let habit = {
         title: req.body.title,
@@ -94,7 +93,6 @@ router.post('/createhabit', (req, res) => {
         }
     })
 });
-
 router.delete('/deletehabit/:id', (req, res) => {
     Habit.deleteOne({
         _id: req.params.id
@@ -106,7 +104,6 @@ router.delete('/deletehabit/:id', (req, res) => {
         }
     })
 })
-
 router.put('/habitcheck/:id', (req, res) => {
     Habit.findByIdAndUpdate(
         { _id: req.params.id },
