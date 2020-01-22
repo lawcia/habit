@@ -24,6 +24,7 @@ export default class HabitForm extends React.Component {
             .then((res) => {
                 if (res.data.success) {
                     alert(res.data.message)
+                    this.props.redirect()
                 }
             })
             .catch((err) => {
@@ -36,6 +37,7 @@ export default class HabitForm extends React.Component {
 
     render() {
         return (
+            
             <form onSubmit={this.handleSubmit}>
                 <label>
                     title:

@@ -22,8 +22,8 @@ export default class Habits extends Component {
         return (
             <div>
                 <h4>Habits container</h4>
-                {this.state.habits.map(habit => {
-                    return <Habit uodatertron={this.uodatertron} state={this.state.updated} habit={habit}/>
+                {this.state.habits.map((habit, index) => {
+                    return <Habit uodatertron={this.uodatertron} state={this.state.updated} habit={habit} key={index}/>
                 })}
                 
             </div>

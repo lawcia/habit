@@ -13,7 +13,7 @@ export default class Habit extends Component {
             <div>
             <p>The habit is: {this.props.habit.title}</p>
             <p>The frequency is: {this.props.habit.frequency}</p>
-            <label for="completed">Done?</label>
+            <label htmlFor="completed">Done?</label>
             <input type="checkbox" name="completed" id="props.habit._id" className=""></input>
             <button name="delete" id="props.habit._id" onClick={this.delete}>Delete</button>
             </div>

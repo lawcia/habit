@@ -17,7 +17,7 @@ export default class App extends Component {
     habits: []
   }
   getUserId = (id, username) => {
-    this.setState({ userId: id , username: username})
+    this.setState({ userId: id, username: username })
   }
   loggedInUser = () => {
     this.setState({ loggedIn: true })
@@ -40,17 +40,16 @@ export default class App extends Component {
                   <Link to="/addHabit">Add Habit</Link>
                 </li>
               </div>
-              }
+            }
           </ul>
         </nav>
         <Switch>
 
-          {this.state.loggedIn && <Route path="/dash">
-            <Dashboard userId={this.state.userId}/>
-          </Route>}
-          {this.state.loggedIn && <Route path="/addHabit">
-            <AddHabit bigState={this.state}/>
-            </Route> }
+          {this.state.loggedIn && <Route path="/dash" render={
+            (props) => <Dashboard {...props} userId={this.state.userId} />
+          } />}
+          {this.state.loggedIn && <Route path="/addHabit" render={(props) => <AddHabit {...props} bigState={this.state} />}
+          />}
           <Route path="/">
             {this.state.loggedIn ? <Redirect to="/dash" /> : <LandingPage setUserId={this.getUserId} loggedIn={this.loggedInUser} />}
           </Route>
