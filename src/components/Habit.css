@@ -2,3 +2,11 @@
     text-decoration: line-through;
     color: blueviolet;
 }
+
+.checkedtrue {
+    color: red
+}
+
+.checkedfalse {
+    display: none;
+}
