@@ -15,10 +15,6 @@ const userSchema = new Schema({
         required: true,
         trim: true,
         minlength: 6
-    },
-    habits: {
-        type: [Schema.ObjectId],
-        ref: 'Habit'
     }
 }, {
     timestamps: true,

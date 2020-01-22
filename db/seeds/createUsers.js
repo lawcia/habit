@@ -9,16 +9,11 @@ const users = [{
     password: 'password'
 }]
 
-const saveUser = () => {
-    User.collection.drop()
-    Habit.collection.drop()
-    users.forEach(user => {
+const saveUser = (user) => {
+    try {
         const userObj = new User(user)
-
         userObj.save((err, data) => {
             if (data) {
-                console.log('saved')
-                console.log(data)
                 const habit = {
                     userId: data._id,
                     title: "Jog", frequency: "Weekly"
@@ -26,20 +21,24 @@ const saveUser = () => {
                 const habitJog = new Habit(habit);
                 habitJog.save((err, data) => {
                     if (err) {
-                        console.error(err)
+                        console.log(err)
                     } else {
-                        userObj.habits.push(data._id)
-                        userObj.save()
-                        console.log(data)
+                        console.log("Saved")
                     }
                 })
             }
         })
-    })
+
+    }
+    catch (err) {
+    }
 }
-
-
-
-module.exports = saveUser
+const seed = (req, res) => {
+    User.collection.drop()
+    Habit.collection.drop()
+    users.forEach(user => saveUser(user))
+    res.send('Seeded')
+}
+module.exports = seed
 
 
