@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 // import { get } from 'mongoose'
 import Axios from 'axios'
 import Habit from '../components/Habit'
-
 export default class Habits extends Component {
     state = {
         habits: [],
@@ -14,13 +13,10 @@ export default class Habits extends Component {
                 this.setState({ habits: response.data })
             })
     }
-
     // uodatertron = () => this.setState({ updated: !this.state.updated })
-
     componentDidMount() {
         this.getAllHabits()
     }
-
     render() {
         return (
             <div>

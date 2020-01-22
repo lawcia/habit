@@ -106,4 +106,17 @@ router.delete('/deletehabit/:id', (req, res) => {
         }
     })
 })
+
+router.put('/addcounter/:id', (req, res) => {
+    
+   const update = (err) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            
+        }
+    }
+    Habit.updateOne(req.params.id, update)
+
+})
 module.exports = router;
