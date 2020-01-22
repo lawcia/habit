@@ -9,7 +9,6 @@ export default function AddHabit(props) {
         const { history } = props;
         if (history) history.push('/dash');
     }
-
     return (
         <div>
             <h1>Add Habits</h1>

@@ -5,7 +5,7 @@ export default class Habit extends Component {
 
     delete = () => {
         Axios.delete(`/api/v1/deletehabit/${this.props.habit._id}`)
-        .then(response => this.props.uodatertron())
+        .then(response => this.props.getAllHabits())
     }
 
     render() {

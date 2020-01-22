@@ -6,16 +6,19 @@ import Habit from '../components/Habit'
 export default class Habits extends Component {
     state = {
         habits: [],
-        updated: false
+        // updated: false
+    }
+    getAllHabits = () => {
+        Axios.get(`/api/v1/getall/${this.props.userId}`)
+            .then(response => {
+                this.setState({ habits: response.data })
+            })
     }
 
-    uodatertron = () => this.setState({updated: !this.state.updated})  
+    // uodatertron = () => this.setState({ updated: !this.state.updated })
 
     componentDidMount() {
-        Axios.get(`/api/v1/getall/${this.props.userId}`)
-        .then(response => {
-            this.setState({habits: response.data})
-        }) 
+        this.getAllHabits()
     }
 
     render() {
@@ -23,9 +26,10 @@ export default class Habits extends Component {
             <div>
                 <h4>Habits container</h4>
                 {this.state.habits.map((habit, index) => {
-                    return <Habit uodatertron={this.uodatertron} state={this.state.updated} habit={habit} key={index}/>
+                    return <Habit state={this.state.updated} habit={habit} 
+                   getAllHabits={this.getAllHabits} key={index} />
                 })}
-                
+
             </div>
         )
     }
