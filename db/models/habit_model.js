@@ -16,7 +16,7 @@ const habitSchema = new Schema({
         minlength: 3
     },
     dateChecked: {
-        type: []
+        type: [Date]
     },
     frequency: {
         type: String,
