@@ -29,7 +29,7 @@ export default class Habit extends Component {
     // 1440 minutes in a day
     console.log('date_diff')
     if(this.props.habit.frequency === 'Daily') {
-        if(this.state.min_diff > 0.3 ){
+        if(this.state.min_diff > 1440 ){
             console.log('state')
             this.setState({
             clicked: false,
@@ -38,20 +38,19 @@ export default class Habit extends Component {
     }
     // 10080 minutes in a week
     if(this.props.habit.frequency === 'Weekly') {
-        this.state.min_diff > 2 && this.setState({
+        this.state.min_diff > 10080 && this.setState({
             clicked: false,
             clickable: true
         })
     }
     // 43800 in a month
     if(this.props.habit.frequency === 'Monthly') {
-        this.state.min_diff > 3 && this.setState({
+        this.state.min_diff > 43800 && this.setState({
             clicked: false,
             clickable: true
         })
     }}
     strikethrough = () => {
-        //this.checkStreak()
         Axios.put(`/api/v1/habitcheck/${this.props.habit._id}`, {streak: this.props.habit.streak})
         .then(() =>{ 
             this.setState({
@@ -62,24 +61,23 @@ export default class Habit extends Component {
     checkStreak = () => {
         // 1440 minutes in a day
     if(this.props.habit.frequency === 'Daily') {
-        if(this.state.min_diff > 2 ){
+        if(this.state.min_diff > 1440*2 ){
             console.log('im true')
             Axios.put(`/api/v1/streak/${this.props.habit._id}`)
         }
     }
     // 10080 minutes in a week
     if(this.props.habit.frequency === 'Weekly') {
-        this.state.min_diff > 4 && Axios.put(`/api/v1/streak/${this.props.habit._id}`)
+        this.state.min_diff > 10080*2 && Axios.put(`/api/v1/streak/${this.props.habit._id}`)
     }
     // 43800 in a month
     if(this.props.habit.frequency === 'Monthly') {
-        this.state.min_diff > 6 && Axios.put(`/api/v1/streak/${this.props.habit._id}`)
+        this.state.min_diff > 43800*2 && Axios.put(`/api/v1/streak/${this.props.habit._id}`)
     }
 }
     
     componentDidMount() {
         setInterval(() => this.calcMinDiff(), 1000);
-        
         setInterval(() => this.checkStreak(), 1000);
         if(this.props.habit.dateChecked.length !== 0){
         this.interval = setInterval(() => this.date_diff_indays(), 1000);
@@ -92,15 +90,16 @@ export default class Habit extends Component {
         
     }
 
-   
     render() {
         return ( <div>
-    <p>the streak is {this.props.habit.streak}</p>
-                    <p className = {`${!this.state.clickable}`}> The habit is: {this.props.habit.title} </p> 
-                    <p > The frequency is: {this.props.habit.frequency} </p>
+                    <h4>{this.props.habit.frequency} habit </h4>
+                    <hr />
+                    <h3 className = {`${!this.state.clickable} `}> {this.props.habit.title} </h3>
+                    <p> <i class="fas fa-star"></i> Current Streak {this.props.habit.streak}</p>
                     <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" > Completed 
                     </ button> 
-                    <button name = "delete" id = "props.habit._id" onClick = {this.delete } > Delete </button>
+                    <button name = "delete" id = "props.habit._id" onClick = {this.delete } > Delete habit </button>
+                    <p>Days habit was done</p>
       <div style={{height:"200px"}}>
                     <ResponsiveCalendar
         data={this.props.habit.dateChecked.map(date => {
@@ -133,7 +132,6 @@ export default class Habit extends Component {
         ]}
     />
     </div>
-
              </div>
         )
     }

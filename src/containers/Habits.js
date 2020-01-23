@@ -20,7 +20,6 @@ export default class Habits extends Component {
     render() {
         return (
             <div>
-                <h4>Habits container</h4>
                 {this.state.habits.map((habit, index) => {
                     return <Habit state={this.state.updated} habit={habit} 
                    getAllHabits={this.getAllHabits} key={index} />
