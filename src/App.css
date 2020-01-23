@@ -41,6 +41,24 @@
   width: 100%;
 }
 
+#new, #existing {
+  margin-top: 36px;
+  background-color: #3A3335;
+  border: none;
+  color: white;
+  padding: 8px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 300px;
+}
+
+#new:hover, #existing:hover {
+  background-color: rgb(29, 26, 27);
+}
+
 .legend {
   font-size: 12px;
   padding-left: 8px;
