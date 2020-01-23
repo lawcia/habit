@@ -26,11 +26,8 @@ export default class RegisterForm extends React.Component {
                 }
             })
             .catch((err) => {
-                if(err.code === 409){
                 alert('This username has already been registered')
-            }else {
-                alert('Something went wrong')
-            }}
+                }
             )
         event.preventDefault();
        
@@ -38,7 +35,7 @@ export default class RegisterForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="landingForm">
                 <label>
                     Username:
             <input type="text" name='username' value={this.state.value} onChange={this.handleChange} minLength={3} required />
@@ -50,7 +47,7 @@ export default class RegisterForm extends React.Component {
             <input type="password" name='password' value={this.state.value} onChange={this.handleChange} minLength={6} required />
                 </label>
                 <br />
-                <input type="submit" value="Submit" />
+                <input className="submitBtn" type="submit" value="Register" />
             </form>
         );
     }

@@ -3,8 +3,8 @@ import Habits from './Habits'
 
 export default function Dashboard(props) {
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className="dashBoard">
+            <h1 className="dashHeading">{props.username}`s Habits</h1>
             <Habits userId={props.userId}/>
         </div>
     )

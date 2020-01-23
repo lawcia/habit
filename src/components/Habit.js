@@ -91,15 +91,17 @@ export default class Habit extends Component {
     }
 
     render() {
-        return ( <div>
-                    <h4>{this.props.habit.frequency} habit </h4>
+        return ( <div className="Habit">
+                    <h3 className = {`${!this.state.clickable} habitName`}> {this.props.habit.title} </h3>
                     <hr />
-                    <h3 className = {`${!this.state.clickable} `}> {this.props.habit.title} </h3>
-                    <p> <i class="fas fa-star"></i> Current Streak {this.props.habit.streak}</p>
-                    <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" > Completed 
+                     {!this.state.clickable && <p style={{textAlign: "center"}}>habit was done. come back {this.props.habit.frequency} to mark complete again!</p>}
+                    <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" ><i class="fas fa-check-circle"></i> mark complete?
                     </ button> 
-                    <button name = "delete" id = "props.habit._id" onClick = {this.delete } > Delete habit </button>
-                    <p>Days habit was done</p>
+                    <div className = "habitDetails">
+                    <h4>{this.props.habit.frequency} habit </h4>
+                    <p> <i class="fas fa-star"></i> Current Streak {this.props.habit.streak}</p>
+                    </div>
+                    <p className="legend">Days habit was done</p>
       <div style={{height:"200px"}}>
                     <ResponsiveCalendar
         data={this.props.habit.dateChecked.map(date => {
@@ -132,6 +134,7 @@ export default class Habit extends Component {
         ]}
     />
     </div>
+    <button className = "deleteBtn" name = "delete" id = "props.habit._id" onClick = {this.delete } > Delete habit </button>
              </div>
         )
     }
