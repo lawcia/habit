@@ -11,6 +11,8 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
     "migrate": "^1.6.2",
     "mocha": "^7.0.0",
