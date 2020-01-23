@@ -36,13 +36,12 @@ export default class HabitForm extends React.Component {
         return (
             
             <form onSubmit={this.handleSubmit}>
-                <label>
+                <label htmlFor="title">
                     title:
             <input type="text" name='title' value={this.state.value} onChange={this.handleChange} minLength={3} required />
                 </label>
-                {}
                 <br />
-                <select name="frequency" id="frequency">
+                <select name="frequency" id="frequency" onChange={this.handleChange}  defaultValue="Daily">
                     <option value="Daily">Daily</option>
                     <option value="Weekly">Weekly</option>
                     <option value="Monthly">Monthly</option>
