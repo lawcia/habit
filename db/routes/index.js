@@ -105,9 +105,27 @@ router.delete('/deletehabit/:id', (req, res) => {
     })
 })
 router.put('/habitcheck/:id', (req, res) => {
+    console.log(req.body.streak +1)
     Habit.findByIdAndUpdate(
         { _id: req.params.id },
-        { $push: { dateChecked: Date() } },
+        { $push: { dateChecked: Date() }},
+        (err, habit) => {
+
+            if(err){
+                 res.send(err)
+            }else {
+                console.log(habit)
+                habit.streak += 1
+                habit.save()
+                res.send(habit)
+            }
+        }
+    )
+})
+router.put('/streak/:id', (req, res) => {
+    Habit.findByIdAndUpdate(
+        { _id: req.params.id },
+        { streak: 0},
         (err, habit) => {
 
             if(err){
