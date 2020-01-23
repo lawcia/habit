@@ -28,12 +28,11 @@ export default class Login extends React.Component {
             })
             .catch((err) => alert('Wrong password!'))
         event.preventDefault();
-        // alert('A name was submitted: ' + this.state.value);
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="landingForm">
                 <label>
                     Username:
             <input type="text" name='username' value={this.state.value} onChange={this.handleChange} required/>
@@ -44,7 +43,7 @@ export default class Login extends React.Component {
             <input type="password" name='password' value={this.state.value} onChange={this.handleChange} required/>
                 </label>
                 <br />
-                <input type="submit" value="Submit" />
+                <input className="submitBtn" type="submit" value="Login" />
             </form>
         );
     }
