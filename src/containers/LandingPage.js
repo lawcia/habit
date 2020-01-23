@@ -5,10 +5,9 @@ import Login from '../components/Login'
 export default function LandingPage(props) {
     return (
         <div>
-            <h1>Landing Page</h1>
-            <h1>Register</h1>
+            <h3>Register</h3>
             <RegisterForm />
-            <h1>Login</h1>
+            <h3>Login</h3>
             <Login loggedInUser={props.loggedIn} setUserId={props.setUserId}/>
         </div>
     )

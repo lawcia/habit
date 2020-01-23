@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LandingPage from './containers/LandingPage';
 import Dashboard from './containers/Dashboard';
 import AddHabit from './containers/AddHabit';
+import './App.css'
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,26 +24,32 @@ export default class App extends Component {
     this.setState({ loggedIn: true })
   }
 
+  refreshPage(){ 
+    window.location.reload(); 
+}
+
   render() {
     return (<Router>
+      <body>
       <div>
         <nav>
           <ul>
-            <li>
-              <Link to="/">Landing Page</Link>
-            </li>
             {this.state.loggedIn &&
-              <div>
+              <div className="nav">
                 <li>
                   <Link to="/dash">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/addHabit">Add Habit</Link>
                 </li>
+                <li>
+                  <Link onClick={()=>this.refreshPage()} to="/">Logout</Link>
+                </li>
               </div>
             }
           </ul>
         </nav>
+        <h1>Habit</h1>
         <Switch>
 
           {this.state.loggedIn && <Route path="/dash" render={
@@ -55,6 +62,7 @@ export default class App extends Component {
           </Route>
         </Switch>
       </div>
+      </body>
     </Router>
     )
   }
