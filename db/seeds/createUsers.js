@@ -12,13 +12,13 @@ const users = [{
 const habits= [{
     title: 'get 8 hours sleep',
     frequency: 'Daily',
-    dateChecked: [new Date(2020, 0, 1, 0, 0, 0), new Date(2020, 0, 2, 0, 0, 0), new Date(2020, 0, 5, 0, 0, 0), new Date(2020, 0, 6, 0, 0, 0),  new Date(2020, 0, 22, 0, 0, 0),new Date()],
+    dateChecked: [new Date(2020, 0, 1, 0, 0, 0), new Date(2020, 0, 2, 0, 0, 0), new Date(2020, 0, 5, 0, 0, 0), new Date(2020, 0, 6, 0, 0, 0),  new Date(2020, 0, 22, 0, 0, 0), new Date()],
     streak: 0
 },
 {
     title: 'walk to work',
     frequency: 'Weekly',
-    dateChecked: [new Date(2020, 0, 6, 0, 0, 0), new Date(2020, 0, 9, 0, 0, 0), new Date(2020, 0, 13, 0, 0, 0), new Date(2020, 0, 15, 0, 0, 0)],
+    dateChecked: [new Date(2020, 0, 6, 0, 0, 0), new Date(2020, 0, 9, 0, 0, 0), new Date(2020, 0, 13, 0, 0, 0), new Date(2020, 0, 15, 0, 0, 0), new Date()],
     streak: 0
 }
 ]

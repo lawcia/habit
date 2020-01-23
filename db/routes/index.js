@@ -105,19 +105,22 @@ router.delete('/deletehabit/:id', (req, res) => {
     })
 })
 router.put('/habitcheck/:id', (req, res) => {
-    console.log(req.body.streak +1)
     Habit.findByIdAndUpdate(
         { _id: req.params.id },
         { $push: { dateChecked: Date() }},
         (err, habit) => {
-
             if(err){
-                 res.send(err)
+                 res.status(500).send(err)
             }else {
-                console.log(habit)
                 habit.streak += 1
-                habit.save()
-                res.send(habit)
+                habit.save((err, resp)=> {
+                    if(err){
+                        res.status(500).send(err)
+                    } else {
+                        res.send(habit)
+                    }
+                })
+               
             }
         }
     )
