@@ -66,6 +66,10 @@ npm start
 ```
 This starts REACT application.
 
+By default the REACT application will run on port 3000
+
+Therefore in you browser go to : http://localhost:3000
+
 note: You can only login if both the API and REACT App is running. 
 
 
