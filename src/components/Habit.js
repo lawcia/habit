@@ -10,15 +10,15 @@ export default class Habit extends Component {
         clicked: false,
         clickable: false,
         startDate: new Date(),
-        min_diff: null
+        min_diff: 0
     }
+
     delete = () => {
         Axios.delete(`/api/v1/deletehabit/${this.props.habit._id}`)
-            .then(response => this.props.getAllHabits())
+            .then(() => this.props.getAllHabits())
     }
 
     calcMinDiff = () => {
-        console.log(this.props.habit.dateChecked[this.props.habit.dateChecked.length -1])
         const dt1 = new Date(this.props.habit.dateChecked[this.props.habit.dateChecked.length -1]);
         const dt2 = new Date();
         const min_diff = Math.floor(Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate(), dt2.getHours(), dt2.getMinutes(), dt2.getSeconds()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate(),dt1.getHours(), dt1.getMinutes(), dt1.getSeconds()) )/ (1000*60 );
@@ -27,10 +27,8 @@ export default class Habit extends Component {
  
     date_diff_indays = () => {
     // 1440 minutes in a day
-    console.log('date_diff')
     if(this.props.habit.frequency === 'Daily') {
         if(this.state.min_diff > 1440 ){
-            console.log('state')
             this.setState({
             clicked: false,
             clickable: true
@@ -51,18 +49,20 @@ export default class Habit extends Component {
         })
     }}
     strikethrough = () => {
+        this.setState({
+            clicked: true, clickable: false 
+        }, () =>{
         Axios.put(`/api/v1/habitcheck/${this.props.habit._id}`, {streak: this.props.habit.streak})
-        .then(() =>{ 
-            this.setState({
-                clicked: true, clickable: false 
-            }, () =>
-            this.props.getAllHabits())})
+        .then(() => {this.props.getAllHabits()
+        })
+        .catch(() => this.setState({
+            clicked: false, clickable: true 
+        }) )})
     }
     checkStreak = () => {
         // 1440 minutes in a day
     if(this.props.habit.frequency === 'Daily') {
         if(this.state.min_diff > 1440*2 ){
-            console.log('im true')
             Axios.put(`/api/v1/streak/${this.props.habit._id}`)
         }
     }
@@ -75,7 +75,7 @@ export default class Habit extends Component {
         this.state.min_diff > 43800*2 && Axios.put(`/api/v1/streak/${this.props.habit._id}`)
     }
 }
-    
+
     componentDidMount() {
         setInterval(() => this.calcMinDiff(), 1000);
         setInterval(() => this.checkStreak(), 1000);
@@ -87,19 +87,20 @@ export default class Habit extends Component {
                 clickable: true
             })
         }
-        
     }
 
     render() {
-        return ( <div>
-                    <h4>{this.props.habit.frequency} habit </h4>
+        return ( <div className="Habit">
+                    <h3 className = {`${!this.state.clickable} habitName`}> {this.props.habit.title} </h3>
                     <hr />
-                    <h3 className = {`${!this.state.clickable} `}> {this.props.habit.title} </h3>
-                    <p> <i class="fas fa-star"></i> Current Streak {this.props.habit.streak}</p>
-                    <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" > Completed 
+                     {!this.state.clickable && <p style={{textAlign: "center"}}>habit was done. come back {this.props.habit.frequency} to mark complete again!</p>}
+                    <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" ><i class="fas fa-check-circle"></i> mark complete?
                     </ button> 
-                    <button name = "delete" id = "props.habit._id" onClick = {this.delete } > Delete habit </button>
-                    <p>Days habit was done</p>
+                    <div className = "habitDetails">
+                    <h4>{this.props.habit.frequency} habit </h4>
+                    <p> <i class="fas fa-star"></i> Current Streak {this.props.habit.streak}</p>
+                    </div>
+                    <p className="legend">Days habit was done</p>
       <div style={{height:"200px"}}>
                     <ResponsiveCalendar
         data={this.props.habit.dateChecked.map(date => {
@@ -132,6 +133,7 @@ export default class Habit extends Component {
         ]}
     />
     </div>
+    <button className = "deleteBtn" name = "delete" id = "props.habit._id" onClick = {this.delete } > Delete habit </button>
              </div>
         )
     }

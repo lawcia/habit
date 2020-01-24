@@ -30,8 +30,7 @@ export default class App extends Component {
 
   render() {
     return (<Router>
-      <body>
-      <div>
+      <div className="App">
         <nav>
           <ul>
             {this.state.loggedIn &&
@@ -49,11 +48,11 @@ export default class App extends Component {
             }
           </ul>
         </nav>
-        <h1>Habit</h1>
+        
         <Switch>
 
           {this.state.loggedIn && <Route path="/dash" render={
-            (props) => <Dashboard {...props} userId={this.state.userId} />
+            (props) => <Dashboard {...props} userId={this.state.userId} username={this.state.username} />
           } />}
           {this.state.loggedIn && <Route path="/addHabit" render={(props) => <AddHabit {...props} bigState={this.state} />}
           />}
@@ -62,7 +61,6 @@ export default class App extends Component {
           </Route>
         </Switch>
       </div>
-      </body>
     </Router>
     )
   }

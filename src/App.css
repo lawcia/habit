@@ -1,8 +1,168 @@
-body {
-  background-image: url("https://www.monarchshores.com/wp-content/uploads/2019/08/Habit-vs-addiction.jpg");
+
+.siteHeading {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 50px;
+  color: #1F2421;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.nav {
+.rightCol{
   display: flex;
-  
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+}
+
+.LandingPage{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-items: center;
+}
+
+.submitBtn{
+  background-color: #98CE00 ;
+  border: none;
+  color: white;
+  padding: 8px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#new, #existing {
+  margin-top: 36px;
+  background-color: #3A3335;
+  border: none;
+  color: white;
+  padding: 8px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 300px;
+}
+
+#new:hover, #existing:hover {
+  background-color: rgb(29, 26, 27);
+}
+
+.legend {
+  font-size: 12px;
+  padding-left: 8px;
+  margin: 0;
+}
+.deleteBtn {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 8px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.deleteBtn:hover {
+  background-color: darkred;
+} 
+
+.landingForm{
+  background-color: aliceblue;
+  padding: 8px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+
+.fa-star{
+  color: #FDE74C;
+}
+
+.Habit{
+  background-color: aliceblue;
+  width: 100%;
+  max-width: 800px;
+ padding: 6px;
+ margin: 6px;
+}
+
+.habitDiv{
+  background-color: aliceblue;
+  padding: 6px;
+}
+
+.dashBoard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.addHabit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  justify-content: flex-start;
+  padding: 6px;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+
+.dashHeading {
+  background-image: linear-gradient(-90deg, #3891A6, #05668D, #124E78);
+  width: 100%;
+  margin: 0;
+  padding: 26px 0;
+  text-align: center;
+  color: aliceblue;
+}
+
+.habitDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
 }

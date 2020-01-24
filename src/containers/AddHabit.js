@@ -10,9 +10,11 @@ export default function AddHabit(props) {
         if (history) history.push('/dash');
     }
     return (
-        <div>
-            <h1>Add Habits</h1>
+        <div className="addHabit">
+            <div className="habitDiv">
+            <h1 style={{textAlign: "center"}}>Add Habit</h1>
             <HabitForm bigState={props.bigState} redirect={redirectToDash} />
+            </div>
         </div>
     )
 }
