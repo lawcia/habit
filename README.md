@@ -54,7 +54,7 @@ This starts the server for the API, which connectes to the mongoDB database.
 
 By default the API will run on port 5000
 
-Therefore in you browser go to : http://localhost:5000/api/v1/seed
+Therefore in you browser go to: ``` http://localhost:5000/api/v1/seed ```
 
 This will seed database habits_db with two collections Users and Habits.
 
@@ -68,8 +68,10 @@ This starts REACT application.
 
 By default the REACT application will run on port 3000
 
-Therefore in you browser go to : http://localhost:3000
+Therefore in you browser go to: ``` http://localhost:3000 ```
 
 note: You can only login if both the API and REACT App is running. 
 
-
+### Contributors:
+Lawrencia ([@lawcia](https://github.com/lawcia "Lawrencia's Github")) |
+Brian M ([@chipembere](https://github.com/chipembere "Brian's Github")) | Aaron ([@AaronM97](https://github.com/AaronM97 "Aaron's Github")) 
