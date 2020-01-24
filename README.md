@@ -36,31 +36,36 @@ npm install
 ```
 This installs all the npm dependencies needed for this project.
 
-### Running the project
-In the terminal run
-```
-nodemon db/server.js
-```
-then
-```
-npm start
-```
-This starts the development server, then runs the application. 
 
 ### Testing
 In the terminal run
 ```
 npm test
 ```
-This runs automated tests to make sure that 
+This runs automated tests to make sure that you can connect to the database
 
 
-### Migrations
-
-change directory to ~habit/db
-in the terminal type this in the command line
+### Running the project
+In the terminal run
 ```
-migrate -d mongodb://localhost:27017/habitsDB create users 
+nodemon db/server.js
 ```
+This starts the server for the API, which connectes to the mongoDB database. 
+
+By default the API will run on port 5000
+
+Therefore in you browser go to : http://localhost:5000/api/v1/seed
+
+This will seed database habits_db with two collections Users and Habits.
+
+Keep the terminal open, and then open a second terminal to run the REACT application. 
+
+In that terminal type 
+```
+npm start
+```
+This starts REACT application.
+
+note: You can only login if both the API and REACT App is running. 
 
 
