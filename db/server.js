@@ -2,9 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const routes = require('./routes/index')
-const bodyParser = require('body-parser')
-
+const routes = require('./routes/index');
+const bodyParser = require('body-parser');
+const { handleError } = require('./helpers/errors');
 
 require('dotenv').config();
 
@@ -44,6 +44,16 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected!!!'));
 
 app.use('/api/v1', routes);
+
+app.use((req, res, next) => {
+    let err = new Error('Not Found');
+    err.status = 404;
+    next(err)
+});
+
+app.use((err, req, res, next) => {
+    handleError(err, res)
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);

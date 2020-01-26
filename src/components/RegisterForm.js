@@ -26,7 +26,7 @@ export default class RegisterForm extends React.Component {
                 }
             })
             .catch((err) => {
-                alert('This username has already been registered')
+                alert(err.response.data.message)
                 }
             )
         event.preventDefault();
