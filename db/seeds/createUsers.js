@@ -1,7 +1,9 @@
 const User = require('../models/user_model')
 const Habit = require('../models/habit_model')
+const bcrypt = require('bcryptjs');
 
-const users = [{
+
+let users = [{
     username: 'user1',
     password: '123456'
 }, {
@@ -24,11 +26,12 @@ const habits= [{
 ]
 
 const saveUser = async (user) => {
-        const userObj = new User(user)
-        const newUser = await userObj.save()
-        return newUser._id
+                user.password = bcrypt.hashSync(user.password, 10)
+                const userObj = new User(user)
+                newUser = await userObj.save()
+                return newUser._id
 }
-const seed = (req, res) => {
+const seed = async (req, res) => {
     User.collection.drop()
     Habit.collection.drop()
     Promise.all(users.map(user => {

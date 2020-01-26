@@ -1,8 +1,10 @@
 const express = require('express');
 const User = require('../models/user_model');
-const router = express.Router();
+const bcrypt = require('bcryptjs');
 
+const router = express.Router();
 const { SESS_NAME } = process.env;
+
 
 router.get('/', (req, res) => {
     const { userId } = req.session;
@@ -26,9 +28,11 @@ router.get('/', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-    let user = {
+    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(req.body.password, (err, hash) => {
+        const user = {
         username: req.body.username,
-        password: req.body.password
+        password: hash
     }
     let newUser = new User(user);
     newUser.save((err, user) => {
@@ -52,20 +56,29 @@ router.post('/register', (req, res) => {
         }
     });
 })
+});
+})
 
 router.post('/login', (req, res) => {
     User.findOne({
         username: req.body.username
-    }, (err, user) => {
+    }, 'password', (err, user) => {
         if (err) {
             res.status(500).send(err)
-        } else if (req.body.password !== user.password) {
-            res.status(404).send('the username or password is incorrect')
+        } else if (!user){
+            res.status(404).send('this user does not exist')
         } else {
-            req.session.userId = user._id;
-            res.send('user has been logged in')
+            bcrypt.compare(req.body.password, user.password, (err, success) => {
+                if(success) {
+                    req.session.userId = user._id;
+                    res.send('user has been logged in')
+                } else {
+                    res.status(404).send('the username or password is incorrect')
+                }
+                })
+            }
         }
-    });
+    )
 })
 
 router.post('/logout', (req, res) => {
