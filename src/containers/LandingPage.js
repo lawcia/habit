@@ -25,7 +25,7 @@ export default class LandingPage extends Component {
             {this.state.existing &&
             <div className="existing">
             <h3>Login</h3>
-            <Login loggedInUser={this.props.loggedIn} setUserId={this.props.setUserId}/>
+            <Login getUserData={this.props.getUserData} />
             </div>}
             </div>
         </div>

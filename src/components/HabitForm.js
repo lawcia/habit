@@ -18,7 +18,7 @@ export default class HabitForm extends React.Component {
         });
     }
     handleSubmit(event) {
-        Axios.post('/api/v1/createhabit', this.state)
+        Axios.post('/api/v1/habits', this.state)
             .then((res) => {
                 if (res.data.success) {
                     alert(res.data.message)

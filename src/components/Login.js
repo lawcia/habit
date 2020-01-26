@@ -19,12 +19,9 @@ export default class Login extends React.Component {
     }
 
     handleSubmit(event) {
-        Axios.post('/api/v1/login', this.state)
-            .then((res) => {
-                if (res.status === 200) {
-                    this.props.setUserId(res.data._id, res.data.username)
-                    this.props.loggedInUser()
-                }
+        Axios.post('/api/v1/users/login', this.state)
+            .then(() => {
+                    this.props.getUserData()
             })
             .catch((err) => alert('Wrong password!'))
         event.preventDefault();

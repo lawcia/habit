@@ -8,7 +8,7 @@ export default class Habits extends Component {
         // updated: false
     }
     getAllHabits = () => {
-        Axios.get(`/api/v1/getall/${this.props.userId}`)
+        Axios.get(`/api/v1/habits/${this.props.userId}`)
             .then(response => {
                 this.setState({ habits: response.data })
             })

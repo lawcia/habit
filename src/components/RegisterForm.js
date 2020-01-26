@@ -19,7 +19,7 @@ export default class RegisterForm extends React.Component {
     }
 
     handleSubmit(event) {
-        Axios.post('/api/v1/createuser', this.state)
+        Axios.post('/api/v1/users/register', this.state)
             .then((res) => {
                 if(res.data.success){
                 alert(res.data.message)

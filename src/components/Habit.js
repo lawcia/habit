@@ -14,7 +14,7 @@ export default class Habit extends Component {
     }
 
     delete = () => {
-        Axios.delete(`/api/v1/deletehabit/${this.props.habit._id}`)
+        Axios.delete(`/api/v1/habits/${this.props.habit._id}`)
             .then(() => this.props.getAllHabits())
     }
 
@@ -52,7 +52,7 @@ export default class Habit extends Component {
         this.setState({
             clicked: true, clickable: false 
         }, () =>{
-        Axios.put(`/api/v1/habitcheck/${this.props.habit._id}`, {streak: this.props.habit.streak})
+        Axios.put(`/api/v1/habits/${this.props.habit._id}`, {streak: this.props.habit.streak})
         .then(() => {this.props.getAllHabits()
         })
         .catch(() => this.setState({
@@ -63,7 +63,7 @@ export default class Habit extends Component {
         // 1440 minutes in a day
     if(this.props.habit.frequency === 'Daily') {
         if(this.state.min_diff > 1440*2 ){
-            Axios.put(`/api/v1/streak/${this.props.habit._id}`)
+            Axios.put(`/api/v1/habits/streak/${this.props.habit._id}`)
         }
     }
     // 10080 minutes in a week

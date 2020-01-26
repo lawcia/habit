@@ -10,22 +10,35 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+import Axios from "axios";
 export default class App extends Component {
   state = {
     loggedIn: false,
     userId: '',
-    username: '',
-    habits: []
-  }
-  getUserId = (id, username) => {
-    this.setState({ userId: id, username: username })
-  }
-  loggedInUser = () => {
-    this.setState({ loggedIn: true })
+    username: ''
   }
 
-  refreshPage(){ 
-    window.location.reload(); 
+  loggedInUser = (userId, username) => {
+    this.setState({ loggedIn: true, userId: userId, username: username })
+  }
+
+  loggedOutUser = () => { 
+    this.setState({ loggedIn: false, userId: '', username: ''}) 
+}
+
+logoutUser = () => {
+  Axios.post("/api/v1/users/logout")
+  .then(() => this.loggedOutUser())
+}
+
+getUserData = () => {
+  Axios.get("/api/v1/users")
+  .then((res) => res.data.userLoggedIn && this.loggedInUser(res.data._id, res.data.username))
+  .catch((err) => console.error(err))
+} 
+
+componentDidMount = () => {
+  this.getUserData()
 }
 
   render() {
@@ -42,7 +55,7 @@ export default class App extends Component {
                   <Link to="/addHabit">Add Habit</Link>
                 </li>
                 <li>
-                  <Link onClick={()=>this.refreshPage()} to="/">Logout</Link>
+                  <Link onClick={()=>this.logoutUser()} to="/">Logout</Link>
                 </li>
               </div>
             }
@@ -57,7 +70,7 @@ export default class App extends Component {
           {this.state.loggedIn && <Route path="/addHabit" render={(props) => <AddHabit {...props} bigState={this.state} />}
           />}
           <Route path="/">
-            {this.state.loggedIn ? <Redirect to="/dash" /> : <LandingPage setUserId={this.getUserId} loggedIn={this.loggedInUser} />}
+            {this.state.loggedIn ? <Redirect to="/dash" /> : <LandingPage getUserData={this.getUserData} />}
           </Route>
         </Switch>
       </div>
