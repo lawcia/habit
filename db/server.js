@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false , useUnifiedTopology: true}));
 app.use(bodyParser.json())
 
 const db_name = (process.env.NODE_ENV === 'test' ? 'test_db' : 'habits_db');
