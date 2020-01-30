@@ -75,6 +75,8 @@ export default class Habit extends Component {
         this.state.min_diff > 43800*2 && Axios.put(`/api/v1/streak/${this.props.habit._id}`)
     }
 }
+   
+    
 
     componentDidMount() {
         setInterval(() => this.calcMinDiff(), 1000);
@@ -101,15 +103,15 @@ export default class Habit extends Component {
                     <p> <i class="fas fa-star"></i> Current Streak {this.props.habit.streak}</p>
                     </div>
                     <p className="legend">Days habit was done</p>
-      <div style={{height:"200px"}}>
+      <div style={{height:"200px", width:"100%", maxWidth:"600px"}}>
                     <ResponsiveCalendar
         data={this.props.habit.dateChecked.map(date => {
             let utcDate = new Date(date)
             let dateStr =  utcDate.toLocaleDateString("sv-SE")
-           return{
+            return{
                day:dateStr, value: 100
-           }
-       })}
+             }
+           })}
         from={this.props.habit.createdAt}
         to={this.state.startDate}
         emptyColor="#eeeeee"

@@ -20,10 +20,8 @@ export default class RegisterForm extends React.Component {
 
     handleSubmit(event) {
         Axios.post('/api/v1/users/register', this.state)
-            .then((res) => {
-                if(res.data.success){
-                alert(res.data.message)
-                }
+            .then(() => {
+                alert('You can now login')
             })
             .catch((err) => {
                 alert(err.response.data.message)
