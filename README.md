@@ -1,4 +1,4 @@
-# Habit 
+# Habit
 
 This application allows users to track actions and create new habits!
 
@@ -18,23 +18,29 @@ This application allows users to track actions and create new habits!
 
 ## Getting Started
 
-Instructions to get this project up and running on your local PC for development and testing purposes. 
-
-### Prerequisites
-- Download [Node.js](https://nodejs.org/en/download/ "node"), follow the link for installation instructions
-- Download [Mongo DB Community Edition](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials "mongo") (a no-SQL database) follow the link for installation instructions
-- Recommended IDE [VS Code](https://code.visualstudio.com/ "VS Code")
+Instructions to get this project up and running on your local PC for development and testing purposes.
 
 ### Installing
-Open the terminal in the project directory and write this command line.
+
+- Open the terminal in the project directory and write this command line.
+
 ```
 git clone https://github.com/lawcia/habit.git
 ```
-then 
+
 ```
 npm install
 ```
-This installs all the npm dependencies needed for this project.
+
+this installs all the npm dependencies for this project
+
+then cd to client/ and npm install to install dependicies for the client side
+
+```
+npm test
+```
+
+this runs automated tests to make sure that the application can run without errors
 
 
 ### Testing
@@ -75,3 +81,4 @@ note: You can only login if both the API and REACT App is running.
 ### Contributors:
 Lawrencia ([@lawcia](https://github.com/lawcia "Lawrencia's Github")) |
 Brian M ([@chipembere](https://github.com/chipembere "Brian's Github")) | Aaron ([@AaronM97](https://github.com/AaronM97 "Aaron's Github")) 
+
