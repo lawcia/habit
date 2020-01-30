@@ -13,7 +13,9 @@ const {
     PORT = 8000,
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
-    SESS_SECRET
+    SESS_SECRET, 
+    USER,
+    PASSWORD
 } = process.env
 
 const TWO_HOURS = 1000 * 60 * 60 * 2;
@@ -34,8 +36,22 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
-const db_name = (process.env.NODE_ENV === 'test' ? 'test_db' : 'habits_db');
-let url = `mongodb://localhost:27017/${db_name}`;
+let db_name;
+switch(NODE_ENV){
+    case 'production':
+        db_name = 'habits_db'
+        break;
+    case 'development':
+        db_name = 'habits_db_dev'
+        break;
+    case 'test':
+        db_name = 'habits_db_test'
+        break;
+    default:
+        throw  new Error('cannot find process env')
+}
+
+let url = `mongodb+srv://${USER}:${PASSWORD}@cluster0-c71bf.mongodb.net/${db_name}`;
 mongoose.connect(url, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const db = mongoose.connection;
