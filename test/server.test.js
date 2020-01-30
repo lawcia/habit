@@ -4,9 +4,9 @@ const chai = require('chai');
 let expect = require('chai').expect;
 let should = require('chai').should();
 const chaiHttp = require('chai-http');
-const server = require('../db/server');
+const server = require('../server');
 let mongoose = require('mongoose');
-const User = require('../db/models/user_model');
+const User = require('../backend/models/user_model');
 
 chai.use(chaiHttp);
 

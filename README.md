@@ -1,4 +1,4 @@
-# Habit 
+# Habit
 
 This application allows users to track actions and create new habits!
 
@@ -12,33 +12,29 @@ This application allows users to track actions and create new habits!
 
 ## Getting Started
 
-Instructions to get this project up and running on your local PC for development and testing purposes. 
+Instructions to get this project up and running on your local PC for development and testing purposes.
 
 ### Prerequisites
+
 - Download [Node.js](https://nodejs.org/en/download/), follow the link for installation instructions
 - Download [Mongo DB Community Edition](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials) (a no-SQL database) follow the link for installation instructions
 
 ### Installing
+
 - Open the terminal in the project directory and write this command line.
+
 ```
 npm install
 ```
+
 this installs all the npm dependencies for this project
 ```
 npm test
 ```
+
 this runs automated tests to make sure that the application can run without errors
 ```
 npm start
 ```
+
 This starts the development server at. You can view the website in the browser. 
-
-### Migrations
-
-change directory to ~habit/db
-in the terminal type this in the command line
-```
-migrate -d mongodb://localhost:27017/habitsDB create users 
-```
-
-

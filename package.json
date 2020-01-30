@@ -3,32 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@nivo/calendar": "^0.61.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.1",
     "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "concurrently": "^5.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "mocha": "^7.0.0",
     "mongoose": "^5.8.9",
-    "nodemon": "^2.0.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0"
+    "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "mocha",
-    "eject": "react-scripts eject"
+    "client": "cd client && npm start",
+    "server": "node server.js",
+    "start": "concurrently --kill-others-on-fail \"npm-run-all -p server client\"",
+    "build": "npm-run-all build-css && react-scripts build",
+    "test": "mocha"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
