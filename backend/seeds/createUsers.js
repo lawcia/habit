@@ -28,7 +28,7 @@ const habits= [{
 const saveUser = async (user) => {
                 user.password = bcrypt.hashSync(user.password, 10)
                 const userObj = new User(user)
-                newUser = await userObj.save()
+                let newUser = await userObj.save()
                 return newUser._id
 }
 const seed = async (req, res) => {

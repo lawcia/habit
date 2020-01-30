@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 const routes = require('./backend/routes/index');
 const bodyParser = require('body-parser');
 const { handleError } = require('./backend/helpers/errors');
-
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 const {
-    PORT = 8000,
+    PORT = 5000,
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
     SESS_SECRET, 
@@ -35,6 +35,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 let db_name;
 switch(NODE_ENV){
@@ -59,6 +60,10 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected!!!'));
 
 app.use('/api/v1', routes);
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.use((req, res, next) => {
     let err = new Error('Not Found');
