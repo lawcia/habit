@@ -2,6 +2,8 @@
 
 This application allows users to track actions and create new habits!
 
+![](habit-demo.gif)
+
 ### User stories
 
 - As a user, when I want to start & track habits, I want an application that will help me do so.
