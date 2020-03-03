@@ -7,7 +7,7 @@ const {createNewUser} = require('./../controllers/users');
 const router = express.Router();
 const { SESS_NAME } = process.env;
 
-
+// get logged in user id from session return user
 router.get('/', (req, res, next) => {
     const { userId } = req.session;
     let userLoggedIn = (userId? true: false); 

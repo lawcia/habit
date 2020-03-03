@@ -2,6 +2,7 @@ const express = require('express');
 const Habit = require('../models/habit_model');
 const router = express.Router();
 
+// get habit by habit id
 router.get('/:id', (req, res) => {
     Habit.find({
         userId: req.params.id
@@ -14,6 +15,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// post habit, data in body
 router.post('/', (req, res) => {
     let habit = {
         title: req.body.title,
@@ -43,6 +45,7 @@ router.post('/', (req, res) => {
     })
 });
 
+// delete habit by habit id
 router.delete('/:id', (req, res) => {
     Habit.deleteOne({
         _id: req.params.id
@@ -55,7 +58,7 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-
+// update habit
 router.put('/:id', (req, res) => {
     Habit.findByIdAndUpdate(
         { _id: req.params.id },
@@ -78,6 +81,7 @@ router.put('/:id', (req, res) => {
     )
 })
 
+// update habit
 router.put('/streak/:id', (req, res) => {
     Habit.findByIdAndUpdate(
         { _id: req.params.id },
