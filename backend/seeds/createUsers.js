@@ -2,7 +2,7 @@ const User = require('../models/user_model')
 const Habit = require('../models/habit_model')
 const bcrypt = require('bcryptjs');
 
-
+// mock users data
 let users = [{
     username: 'user1',
     password: '123456'
@@ -11,6 +11,7 @@ let users = [{
     password: 'password'
 }]
 
+// mock habit data
 const habits= [{
     title: 'get 8 hours sleep',
     frequency: 'Daily',
@@ -25,12 +26,15 @@ const habits= [{
 }
 ]
 
+// saves user to database, returns id
 const saveUser = async (user) => {
                 user.password = bcrypt.hashSync(user.password, 10)
                 const userObj = new User(user)
                 let newUser = await userObj.save()
                 return newUser._id
 }
+
+// drops databases then saves users and habits to db
 const seed = async (req, res) => {
     User.collection.drop()
     Habit.collection.drop()
