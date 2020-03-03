@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nivo/calendar": "^0.61.1",
+    "@testing-library/jest-dom": "^5.0.2",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^8.1.0",
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
@@ -15,13 +20,17 @@
     "express-session": "^1.17.0",
     "mocha": "^7.0.0",
     "mongoose": "^5.8.9",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.3.0"
   },
   "scripts": {
-    "client": "cd client && npm start",
-    "server": "node server.js",
-    "start": "concurrently --kill-others-on-fail \"npm-run-all -p server client\"",
-    "build": "npm-run-all build-css && react-scripts build",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "mocha"
   },
   "eslintConfig": {
@@ -38,8 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "npm-run-all": "^4.1.5"
   }
 }
