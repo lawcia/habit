@@ -60,9 +60,9 @@ npm start
 ```
 This starts the express server.
 
-By default the website will run on port 5000
+By default the website will run on port 3000
 
-Go to http://localhost:5000/ in the browser. You should now see the website.
+Go to http://localhost:3000/ in the browser. You should now see the website.
 
 ## Seed the database
 
