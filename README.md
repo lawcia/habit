@@ -2,6 +2,8 @@
 
 This application allows users to track actions and create new habits!
 
+![](habit-demo.gif)
+
 ### User stories
 
 - As a user, when I want to start & track habits, I want an application that will help me do so.
@@ -52,31 +54,21 @@ This runs automated tests to make sure that you can connect to the database
 
 
 ### Running the project
-In the terminal run
-```
-nodemon db/server.js
-```
-This starts the server for the API, which connectes to the mongoDB database. 
-
-By default the API will run on port 5000
-
-Therefore in you browser go to: http://localhost:5000/api/v1/seed 
-
-This will seed database habits_db with two collections Users and Habits.
-
-Keep the terminal open, and then open a second terminal to run the REACT application. 
-
-In that terminal type 
+In the terminal type
 ```
 npm start
 ```
-This starts REACT application.
+This starts the express server.
 
-By default the REACT application will run on port 3000
+By default the website will run on port 5000
 
-Therefore in you browser go to: http://localhost:3000 
+Go to http://localhost:5000/ in the browser. You should now see the website.
 
-note: You can only login if both the API and REACT App is running. 
+## Seed the database
+
+To seed the database go to: http://localhost:5000/api/v1/seed 
+
+This will seed database habits_db with two collections Users and Habits.
 
 ### Contributors:
 Lawrencia ([@lawcia](https://github.com/lawcia "Lawrencia's Github")) |

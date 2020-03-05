@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const { handleError } = require('./backend/helpers/errors');
 
 // so that you can use .env 
+const path = require('path');
 require('dotenv').config();
 
 // for routing
@@ -14,7 +15,7 @@ const app = express();
 
 // get environment variables
 const {
-    PORT = 8000,
+    PORT = 5000,
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
     SESS_SECRET, 
@@ -40,6 +41,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // assign database name depending on environment
 let db_name;
@@ -68,7 +70,10 @@ db.once('open', () => console.log('Connected!!!'));
 // routes for api
 app.use('/api/v1', routes);
 
-// for error handling
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
 app.use((req, res, next) => {
     let err = new Error('Not Found');
     err.status = 404;
