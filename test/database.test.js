@@ -6,7 +6,7 @@ let should = require('chai').should();
 const {uri} = require('../server');
 let mongoose = require('mongoose');
 
-describe('Connect to database', () => {
+describe('Database', () => {
 
     after(() => {
         mongoose.connection.close();
