@@ -45,22 +45,25 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // assign database name depending on environment
 let db_name;
+let uri;
 switch(NODE_ENV){
     case 'production':
-        db_name = 'habits_db'
+        db_name = 'habits_db';
+        uri = `mongodb+srv://${USER}:${PASSWORD}@cluster0-c71bf.mongodb.net/${db_name}`;
         break;
     case 'development':
-        db_name = 'habits_db_dev'
+        db_name = 'habits_db_dev';
+        uri = `mongodb://localhost:27017/${db_name}`;
         break;
     case 'test':
         db_name = 'habits_db_test'
+        uri = `mongodb://localhost:27017/${db_name}`;
         break;
     default:
         throw  new Error('cannot find process env')
 }
 
-// MongoDB connection
-let uri = `mongodb+srv://${USER}:${PASSWORD}@cluster0-c71bf.mongodb.net/${db_name}`;
+// MongoDB connection 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const db = mongoose.connection;
@@ -70,10 +73,12 @@ db.once('open', () => console.log('Connected!!!'));
 // routes for api
 app.use('/api/v1', routes);
 
-app.get('*', (req,res) =>{
+// routes for frontend
+app.get('*', (req, res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
+// error handling
 app.use((req, res, next) => {
     let err = new Error('Not Found');
     err.status = 404;
@@ -89,4 +94,4 @@ app.listen(PORT, () => {
     console.log(`Habit is running on port: ${PORT}`);
 });
 
-module.exports = app;
+module.exports = {app : app, uri : uri};
