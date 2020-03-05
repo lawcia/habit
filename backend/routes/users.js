@@ -2,32 +2,14 @@ const express = require('express');
 const User = require('../models/user_model');
 const bcrypt = require('bcryptjs');
 const {ErrorHandler} = require('./../helpers/errors');
-const {createNewUser} = require('./../controllers/users');
+const {createNewUser,
+       loginUser} = require('./../controllers/users');
 
 const router = express.Router();
 const { SESS_NAME } = process.env;
 
 // get logged in user id from session return user
-router.get('/', (req, res, next) => {
-    const { userId } = req.session;
-    let userLoggedIn = (userId? true: false); 
-    if(userLoggedIn){
-    User.findOne({
-        _id: userId
-    }, (err, user) => {
-        if (err || !user) {
-            next(err)
-        } else {
-            res.json({
-                userLoggedIn,
-                _id : user._id,
-                username: user.username})
-        }
-       })
-    } else {
-     res.json({userLoggedIn})
-    }
-})
+router.get('/', loginUser)
 
 router.post('/register', (req, res, next) => {
         let {username, password} = req.body;

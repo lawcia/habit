@@ -31,12 +31,13 @@ describe('Connect to API', function() {
         })
     })
 
-    it('GET /api/v1/users', function(done){
+    it('GET /api/v1/users check user is logged in', function(done){
         chai
         .request(app)
         .get('/api/v1/users')
         .then((res) => {
             done()
+            res.status.should.equal(200);
             res.should.be.a('object');
             res.body.should.have.property('userLoggedIn');
             res.body.userLoggedIn.should.equal(false);
