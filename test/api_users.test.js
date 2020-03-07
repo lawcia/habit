@@ -2,13 +2,12 @@ process.env.NODE_ENV = 'test';
 
 const mocha = require('mocha');
 const chai = require('chai');
-let should = require('chai').should();
+const should = require('chai').should();
 const sinon = require('sinon');
 const sinonChai = require("sinon-chai");
 const chaiHttp = require('chai-http');
 const {app} = require('../server');
 const User = require('../backend/models/user_model');
-const Habit = require('../backend/models/habit_model');
 
 chai.use(chaiHttp);
 chai.use(sinonChai);
@@ -36,7 +35,7 @@ describe('API users routes', () => {
             Object.keys(res.body).length.should.equal(1);
         })
         .catch(err => done(err))
-    })
+    });
 
     it('POST /api/v1/users/register should register a new User',  done => {
         chai.request(app)
@@ -205,8 +204,8 @@ describe('API users routes', () => {
     })
 
     it('POST /api/v1/users/register send server error',  done => {
-        const error = new Error('something went wrong');
-        sinon.stub(User.prototype, 'save').rejects(error);
+        const error = new Error();
+        let stub = sinon.stub(User.prototype, 'save').rejects(error);
         chai.request(app)
         .post('/api/v1/users/register')
         .send({username: username, password: password})
@@ -214,14 +213,18 @@ describe('API users routes', () => {
                 res.should.be.a('object');
                 res.status.should.equal(500);
                 res.body.should.have.property('message');
-                //res.body.message.should.equal('something went wrong');
+                res.body.message.should.equal('Internal server error');
                 res.body.should.have.property('status');
                 res.body.status.should.equal('error');
                 res.body.should.have.property('statusCode');
                 res.body.statusCode.should.equal(500);
+                stub.restore();
                 done();
             })
-            .catch(err => done(err))
+            .catch(err => {
+                stub.restore();
+                done(err)
+            })
     })
 
 
@@ -233,6 +236,9 @@ describe('API users routes', () => {
             res.status.should.equal(200);
             res.should.be.a('object');
             res.should.have.cookie('sid');
+            res.body.should.have.property('message');
+            res.body.message.should.equal('user has been logged in');
+            Object.keys(res.body).length.should.equal(1);
             agent.get('/api/v1/users')
             .then(res => {
                 res.status.should.equal(200);
@@ -246,6 +252,106 @@ describe('API users routes', () => {
                 Object.keys(res.body).length.should.equal(3);
                 done();
             }).catch(err => done(err))
+        })
+        .catch(err => done(err))
+    })
+
+    it('POST /api/v1/users/login should send user does not exist', done => {
+        let agent = chai.request.agent(app);
+        agent.post('/api/v1/users/login')
+        .send({username:'randomuser', password: password})
+        .then(res => {
+            res.status.should.equal(404);
+            res.should.be.a('object');
+            res.should.not.have.cookie('sid');
+            res.body.should.have.property('status');
+            res.body.status.should.equal('error');
+            res.body.should.have.property('statusCode');
+            res.body.statusCode.should.equal(404);
+            res.body.should.have.property('message');
+            res.body.message.should.equal('this user does not exist');
+            agent.get('/api/v1/users')
+            .then(res => {
+                res.status.should.equal(200);
+                res.should.be.a('object');
+                agent.should.not.have.cookie('sid');
+                res.body.should.have.property('userLoggedIn');
+                res.body.userLoggedIn.should.equal(false);
+                res.body.should.not.have.property('_id');
+                res.body.should.not.have.property('username');
+                Object.keys(res.body).length.should.equal(1);
+                done();
+            }).catch(err => done(err))
+        })
+        .catch(err => done(err))
+    })
+
+    it('POST /api/v1/users/login should send incorrect password', done => {
+        let agent = chai.request.agent(app);
+        agent.post('/api/v1/users/login')
+        .send({username: username, password: 'wrongpassword'})
+        .then(res => {
+            res.status.should.equal(409);
+            res.should.be.a('object');
+            res.should.not.have.cookie('sid');
+            res.body.should.have.property('status');
+            res.body.status.should.equal('error');
+            res.body.should.have.property('statusCode');
+            res.body.statusCode.should.equal(409);
+            res.body.should.have.property('message');
+            res.body.message.should.equal('the password is incorrect');
+            agent.get('/api/v1/users')
+            .then(res => {
+                res.status.should.equal(200);
+                res.should.be.a('object');
+                agent.should.not.have.cookie('sid');
+                res.body.should.have.property('userLoggedIn');
+                res.body.userLoggedIn.should.equal(false);
+                res.body.should.not.have.property('_id');
+                res.body.should.not.have.property('username');
+                Object.keys(res.body).length.should.equal(1);
+                done();
+            }).catch(err => done(err))
+        })
+        .catch(err => done(err))
+    })
+
+    it('POST /api/v1/users/login should send server error', done => {
+        let error = new Error();
+        sinon.stub(User, 'findOne').rejects(error);
+        chai.request(app)
+        .post('/api/v1/users/login')
+        .send({username: username, password: password})
+        .then(res => {
+            res.status.should.equal(500)
+            res.should.be.a('object');
+            res.body.should.have.property('message');
+            res.body.message.should.equal('Internal server error');
+            res.body.should.have.property('status');
+            res.body.status.should.equal('error');
+            res.body.should.have.property('statusCode');
+            res.body.statusCode.should.equal(500);
+            done()
+        })
+        .catch(err => done(err))
+    })
+
+    it('POST /api/v1/users/logout should logout user', done => {
+        let error = new Error();
+        sinon.stub(User, 'findOne').rejects(error);
+        chai.request(app)
+        .post('/api/v1/users/logout')
+        .send({username: username, password: password})
+        .then(res => {
+            res.status.should.equal(200)
+            res.should.be.a('object');
+            res.body.should.have.property('message');
+            res.body.message.should.equal('Internal server error');
+            res.body.should.have.property('status');
+            res.body.status.should.equal('error');
+            res.body.should.have.property('statusCode');
+            res.body.statusCode.should.equal(500);
+            done()
         })
         .catch(err => done(err))
     })
