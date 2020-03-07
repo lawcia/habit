@@ -4,7 +4,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = require('./backend/routes/index');
 const bodyParser = require('body-parser');
-const { handleError } = require('./backend/helpers/errors');
+const { ErrorHandler, 
+    handleError } = require('./backend/helpers/errors');
 
 // so that you can use .env 
 const path = require('path');
@@ -78,10 +79,9 @@ app.get('*', (req, res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-// error handling
+//error handling
 app.use((req, res, next) => {
-    let err = new Error('Not Found');
-    err.status = 404;
+    let err = new ErrorHandler(404, 'Not Found');
     next(err)
 });
 
