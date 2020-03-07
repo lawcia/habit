@@ -1,27 +1,7 @@
 const User = require('../models/user_model');
 const bcrypt = require('bcryptjs');
 const {ErrorHandler} = require('./../helpers/errors');
-
-const UserFindOne = (res, next, userId, userLoggedIn) => {
-    User.findOne({
-            _id: userId
-        })
-        .then(user => {
-            const {
-                _id,
-                username
-            } = user;
-            res.json({
-                userLoggedIn,
-                _id,
-                username
-            });
-        })
-        .catch(err => {
-            err = new ErrorHandler()
-            next(err);
-        })
-}
+const { SESS_NAME } = process.env;
 
 const registerUser = (req, res, next) => {
     if(!req.body.hasOwnProperty('username')){
@@ -43,23 +23,70 @@ const registerUser = (req, res, next) => {
     const newUser = new User(user);
     newUser.save()
     .then(resp => res.status(201).json(resp))
-    .catch(err => { 
-        err = err.code === 11000 ? new ErrorHandler(409, 'this username has been taken') : new ErrorHandler()
-        next(err)
+    .catch(error => { 
+        error = error.code === 11000 ? new ErrorHandler(409, 'this username has been taken') : new ErrorHandler()
+        next(error)
     })
+}
+
+const getUser = (req, res, next) => {
+    const {userId} = req.session;
+    const userLoggedIn = (userId ? true : false);
+    if(userLoggedIn){
+        User.findOne({ _id: userId})
+        .then(user => {
+            const {
+                _id,
+                username
+            } = user;
+            res.json({
+                userLoggedIn,
+                _id,
+                username
+            });
+        })
+        .catch(() => {
+            let error = new ErrorHandler()
+            next(error)})
+    } else {
+        res.json({
+            userLoggedIn
+        })
+    } 
 }
 
 const loginUser = (req, res, next) => {
-    const {
-        userId
-    } = req.session;
-    const userLoggedIn = (userId ? true : false);
-    userLoggedIn ? UserFindOne(res, next, userId, userLoggedIn) : res.json({
-        userLoggedIn
+    User.findOne({
+        username: req.body.username
+    }, 'password')
+    .then(user => {
+        if(!user) throw new ErrorHandler(404, 'this user does not exist');
+        bcrypt.compare(req.body.password, user.password)
+        .then(success => {
+            if(!success) throw new ErrorHandler(409, 'the password is incorrect')
+            req.session.userId = user._id;
+            res.status(200).json({message: 'user has been logged in'});
+        }).catch(error => next(error))
     })
+    .catch(error => {
+        error = !error.hasOwnProperty('statusCode') ? new ErrorHandler() : error
+        next(error)})
+}
+
+const logoutUser = (req, res, next) => {
+    try {
+        req.session.destroy()
+        res.clearCookie(SESS_NAME)
+        res.status(200).json({message: 'logged out user'})
+    } catch {
+        let error = new ErrorHandler();
+        next(error)
+    }
 }
 
 module.exports = {
+    getUser,
+    registerUser,
     loginUser,
-    registerUser
+    logoutUser
 }
