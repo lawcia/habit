@@ -2,7 +2,7 @@ const express = require('express');
 const Habit = require('../models/habit_model');
 const router = express.Router();
 
-// get habit by habit id
+// get habits by user id
 router.get('/:id', (req, res) => {
     Habit.find({
         userId: req.params.id
