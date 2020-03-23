@@ -1,49 +1,14 @@
 const express = require('express');
 const Habit = require('../models/habit_model');
+const { findHabits, 
+        addHabit } = require('../controllers/habits');
 const router = express.Router();
 
-// get habit by habit id
-router.get('/:id', (req, res) => {
-    Habit.find({
-        userId: req.params.id
-    }, (err, Habits) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.send(Habits)
-        }
-    })
-})
+// get habits by user id
+router.get('/:id', findHabits)
 
 // post habit, data in body
-router.post('/', (req, res) => {
-    let habit = {
-        title: req.body.title,
-        frequency: req.body.frequency,
-        userId: req.body.userId
-    }
-    let newHabit = new Habit(habit);
-    newHabit.save((err) => {
-        if (err) {
-            if (err.code === 11000) {
-                res.status(409).json({
-                    success: false,
-                    message: 'Not added'
-                })
-            } else {
-                res.status(500).json({
-                    success: false,
-                    message: 'Internal server error'
-                })
-            }
-        } else {
-            res.send({
-                success: true,
-                message: 'You have added habit!'
-            })
-        }
-    })
-});
+router.post('/', addHabit)
 
 // delete habit by habit id
 router.delete('/:id', (req, res) => {
