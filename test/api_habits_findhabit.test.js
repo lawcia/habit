@@ -11,6 +11,8 @@ const User = require('../backend/models/user_model');
 const Habit = require('../backend/models/habit_model');
 const bcrypt = require('bcryptjs');
 
+chai.use(chaiHttp);
+
 describe('API habits/:id', () => {
     let userId;
     let habitId;
@@ -73,6 +75,29 @@ describe('API habits/:id', () => {
             done();
         })
         .catch(error => done(error))
+    })
+
+    it('GET /api/v1/habits/:id respond with error', done => {
+        const err = new Error();
+        let stub = sinon.stub(Habit, 'find').rejects(err);
+        chai.request(app)
+        .get(`/api/v1/habits/${userId}`)
+        .then(res => {
+            res.status.should.equal(500);
+            res.should.be.a('object');
+            res.body.should.have.property('message');
+            res.body.message.should.equal('Internal server error');
+            res.body.should.have.property('status');
+            res.body.status.should.equal('error');
+            res.body.should.have.property('statusCode');
+            res.body.statusCode.should.equal(500);
+            stub.restore();
+            done();
+        })
+        .catch(error => {
+            stub.restore();
+            done(error)
+        })
     })
 
 })
