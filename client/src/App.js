@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import LandingPage from './containers/LandingPage';
+import LandingPage from './containers/LandingPage/LandingPage';
 import Dashboard from './containers/Dashboard';
 import AddHabit from './containers/AddHabit';
 import './App.css'

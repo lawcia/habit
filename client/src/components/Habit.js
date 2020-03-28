@@ -96,7 +96,8 @@ export default class Habit extends Component {
                     <h3 className = {`${!this.state.clickable} habitName`}> {this.props.habit.title} </h3>
                     <hr />
                      {!this.state.clickable && <p style={{textAlign: "center"}}>habit was done. come back {this.props.habit.frequency} to mark complete again!</p>}
-                    <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" ><i class="fas fa-check-circle"></i> mark complete?
+                    <button className = {`checked${this.state.clickable}`} onClick = {() => this.strikethrough()} id = "props.habit._id" >
+                        <i class="fas fa-check-circle"></i> mark complete?
                     </ button> 
                     <div className = "habitDetails">
                     <h4>{this.props.habit.frequency} habit </h4>

@@ -1,30 +1,6 @@
-.siteHeading {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 50px;
-  color: #1F2421;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.rightCol{
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  align-items: center;
-}
-
 .App {
   height: 100%;
   width: 100%;
-}
-
-.LandingPage{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-items: center;
 }
 
 input[type=text], input[type=password], select {
@@ -45,24 +21,6 @@ input[type=text], input[type=password], select {
   font-size: 16px;
   cursor: pointer;
   width: 100%;
-}
-
-#new, #existing {
-  margin-top: 36px;
-  background-color: #3A3335;
-  border: none;
-  color: white;
-  padding: 8px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  width: 300px;
-}
-
-#new:hover, #existing:hover {
-  background-color: rgb(29, 26, 27);
 }
 
 .legend {

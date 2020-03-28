@@ -38,7 +38,6 @@ export default class RegisterForm extends React.Component {
                     Username:
             <input type="text" name='username' value={this.state.value} onChange={this.handleChange} minLength={3} maxLength={20} required />
                 </label>
-                {}
                 <br />
                 <label>
                     Password:

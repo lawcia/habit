@@ -58,7 +58,7 @@ In the terminal type
 ```
 npm start
 ```
-This starts the express server.
+This starts the express development server.
 
 By default the website will run on port 5000
 
