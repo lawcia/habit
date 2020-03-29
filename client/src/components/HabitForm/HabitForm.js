@@ -34,15 +34,29 @@ export default class HabitForm extends React.Component {
     render() {
         return (
             
-            <form className="habitForm" onSubmit={this.handleSubmit}>
+            <form 
+            className="habitForm"
+            onSubmit={this.handleSubmit}>
                 <label htmlFor="title">
                     My new habit will be called:  
-            <input type="text" name='title' value={this.state.value} onChange={this.handleChange} minLength={3} maxLength={25} required />
+            <input 
+            type="text" 
+            name='title' 
+            value={this.state.value}
+            onChange={this.handleChange}
+            minLength={3}
+            maxLength={25}
+            required />
                 </label>
                 <br />
                 <label htmlFor="frequency">
-                    I want to complete this habit:  
-                <select name="frequency" id="frequency" onChange={this.handleChange}  defaultValue="Daily">
+                    I want to complete this habit:
+                <select
+                name="frequency"
+                id="frequency"
+                onChange={this.handleChange}
+                defaultValue="Daily"
+                >
                     <option value="Daily">Daily</option>
                     <option value="Weekly">Weekly</option>
                     <option value="Monthly">Monthly</option>

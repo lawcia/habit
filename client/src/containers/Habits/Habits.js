@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-// import { get } from 'mongoose'
 import Axios from 'axios'
-import Habit from '../components/Habit'
+import Habit from '../../components/Habit/Habit'
 export default class Habits extends Component {
     state = {
         habits: [],
-        // updated: false
     }
     getAllHabits = () => {
         Axios.get(`/api/v1/habits/${this.props.userId}`)
@@ -13,7 +11,7 @@ export default class Habits extends Component {
                 this.setState({ habits: response.data })
             })
     }
-    // uodatertron = () => this.setState({ updated: !this.state.updated })
+
     componentDidMount() {
         this.getAllHabits()
     }
@@ -24,7 +22,6 @@ export default class Habits extends Component {
                     return <Habit state={this.state.updated} habit={habit} 
                    getAllHabits={this.getAllHabits} key={index} />
                 })}
-
             </div>
         )
     }

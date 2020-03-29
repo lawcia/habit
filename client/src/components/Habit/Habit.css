@@ -1,0 +1,116 @@
+.Habit{
+    background-color: aliceblue;
+    width: 300px;
+    padding: 6px;
+    margin: 6px;
+}
+
+.habitDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+}
+  
+.true {
+    text-decoration: line-through;
+}
+
+.habitName {
+    text-align: center;
+}
+
+.checkedtrue {
+    background-color:#124E78;
+    border: none;
+    color: white;
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkedtrue:hover {
+    background-color:rgb(27, 59, 82);
+    border: none;
+    color: white;
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkedfalse {
+    display: none;
+}
+
+.calendarDiv{
+    height: 200px; 
+    width: 100%;
+}
+
+.fa-star{
+    color: #FDE74C;
+}
+
+.legend {
+    font-size: 12px;
+    padding-left: 8px;
+    margin: 0;
+}
+
+.deleteBtn {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 8px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+  
+  .deleteBtn:hover {
+    background-color: darkred;
+} 
+  
+
+@media only screen and (min-width: 350px) {
+    .Habit{
+        width: 320px;
+    }
+}
+
+@media only screen and (min-width: 390px) {
+    .Habit{
+        width: 375px;
+    }
+}
+
+@media only screen and (min-width: 580px) {
+    .Habit{
+        width: 568px;
+    }
+   
+}
+
+@media only screen and (min-width: 780px) {
+    .Habit{
+        width: 768px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .Habit{
+        width: 980px;
+    }
+}

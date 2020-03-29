@@ -1,0 +1,15 @@
+.dashBoard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashHeading{
+    background-image: linear-gradient(-90deg, #3891A6, #05668D, #124E78);
+    width: 100%;
+    margin: 0;
+    padding: 26px 0;
+    text-align: center;
+    color: aliceblue;
+}

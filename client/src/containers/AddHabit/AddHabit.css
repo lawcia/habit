@@ -1,0 +1,18 @@
+.habitDiv{
+    background-color: aliceblue;
+    padding: 6px;
+}
+
+.addHabit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 25px;
+    justify-content: flex-start;
+    padding: 6px;
+    height: 100%;
+}
+
+.title{
+    text-align: center;
+}
