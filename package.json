@@ -31,7 +31,8 @@
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "mocha"
+    "test": "mocha",
+    "start-dev": "cd client && npm run build && cd .. && nodemon server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "prettier": "^2.0.2",
     "sinon": "^9.0.0",
     "sinon-chai": "^3.5.0"
   }

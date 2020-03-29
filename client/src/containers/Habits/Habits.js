@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios'
-import Habit from '../components/Habit'
+import Habit from '../../components/Habit/Habit'
 export default class Habits extends Component {
     state = {
         habits: [],
@@ -22,7 +22,6 @@ export default class Habits extends Component {
                     return <Habit state={this.state.updated} habit={habit} 
                    getAllHabits={this.getAllHabits} key={index} />
                 })}
-
             </div>
         )
     }
